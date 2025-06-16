@@ -12,7 +12,7 @@ function App() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3000/states")
+   axios.get("https://solar-price-api.onrender.com/states")
       .then(res => setStates(res.data))
       .catch(err => setError("Failed to fetch states"));
   }, []);
@@ -24,12 +24,13 @@ function App() {
     }
 
     try {
-      const res = await axios.get("http://localhost:3000/price", {
-        params: {
-          source,
-          destination,
-          amount,
-          hasStorage
+      const res = await axios.get("https://solar-price-api.onrender.com/price", {
+  params: {
+    source,
+    destination,
+    amount,
+    hasStorage
+
         }
       });
       setResult(res.data);
