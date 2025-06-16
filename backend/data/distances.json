@@ -1,0 +1,52 @@
+{
+  "Rajasthan": {
+    "Maharashtra": 1100,
+    "Gujarat": 500,
+    "Tamil Nadu": 1800,
+    "Karnataka": 1700,
+    "Delhi": 480,
+    "Punjab": 700
+  },
+  "Maharashtra": {
+    "Tamil Nadu": 1400,
+    "Karnataka": 800,
+    "Madhya Pradesh": 780,
+    "Chhattisgarh": 1050,
+    "Telangana": 620
+  },
+  "Gujarat": {
+    "Maharashtra": 600,
+    "Rajasthan": 500,
+    "Delhi": 950
+  },
+  "Delhi": {
+    "Uttar Pradesh": 200,
+    "Punjab": 450,
+    "Haryana": 50,
+    "Rajasthan": 480,
+    "Bihar": 1000,
+    "West Bengal": 1500
+  },
+  "Tamil Nadu": {
+    "Karnataka": 350,
+    "Andhra Pradesh": 600
+  },
+  "Karnataka": {
+    "Telangana": 650,
+    "Andhra Pradesh": 450
+  },
+  "Uttar Pradesh": {
+    "Madhya Pradesh": 800,
+    "Bihar": 600
+  },
+  "Madhya Pradesh": {
+    "Chhattisgarh": 450
+  },
+  "Chhattisgarh": {
+    "West Bengal": 850,
+    "Telangana": 800
+  },
+  "West Bengal": {
+    "Bihar": 500
+  }
+}
