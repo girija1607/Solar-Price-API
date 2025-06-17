@@ -7,6 +7,8 @@ const swaggerJsdoc = require('swagger-jsdoc');
 
 
 const app = express();
+console.log("🚨 index.js loaded!");
+
 const PORT = process.env.PORT || 3000;
 
 
@@ -101,27 +103,45 @@ app.get('/api/solar-price', (req, res) => {
 
   // Example logic: commercial might be 5% more expensive
   const typeFactor = type === "commercial" ? 1.05 : 1;
-  const pricePerKWh = (base * typeFactor).toFixed(2);
-  const estimatedCost = (pricePerKWh * amountKWh).toFixed(2);
+  const pricePerKWh = parseFloat((base * typeFactor).toFixed(2));
+
+  const estimatedCost = parseFloat((pricePerKWh * amountKWh).toFixed(2));
 
   const subsidyRate = 0.1; // 10%
   const gridPrice = 7.0; // ₹7/kWh (example)
   const costWithGrid = parseFloat((gridPrice * amountKWh).toFixed(2));
-  const savings = parseFloat((costWithGrid - estimatedCost).toFixed(2));
+  const subsidizedCost = parseFloat((estimatedCost * (1 - subsidyRate)).toFixed(2));
+  const savings = parseFloat((costWithGrid - subsidizedCost).toFixed(2));
+  console.log("DEBUG RESPONSE", {
+    location,
+    type,
+    usage: `${amountKWh} kWh`,
+    price_per_kWh: pricePerKWh,
+    estimated_monthly_cost: estimatedCost,
+    subsidized_cost: subsidizedCost,
+    currency: "INR",
+    data_source: "MNRE, IEX",
+    date: date || new Date().toISOString(),
+    subsidy: subsidyRate,
+    grid_price_per_kWh: gridPrice,
+    savings_vs_grid: savings
+  });
 
   res.json({
     location,
     type,
     usage: `${amountKWh} kWh`,
-    price_per_kWh: parseFloat(pricePerKWh),
-    estimated_monthly_cost: parseFloat(estimatedCost),
+    price_per_kWh: pricePerKWh,
+    estimated_monthly_cost: estimatedCost,
+    subsidized_cost: subsidizedCost,  // 👈 This should now show up correctly
     currency: "INR",
     data_source: "MNRE, IEX",
     date: date || new Date().toISOString(),
-     subsidy: subsidyRate,
+    subsidy: subsidyRate,
     grid_price_per_kWh: gridPrice,
     savings_vs_grid: savings
   });
+
 });
 
 
